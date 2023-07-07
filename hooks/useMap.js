@@ -9,7 +9,7 @@ const MapContext = createContext()
 const MapProvider = ({ children }) => {
   const [markers, setMarkers] = useState([])
   const [names, setNames] = useState([])
-  const { setChartId } = useChart()
+  const [chartId, setChartId] = useState(null)
 
   const handleApiLoaded = (map, maps) => {
     const coordinatesArrays = []
@@ -48,7 +48,6 @@ const MapProvider = ({ children }) => {
 
       // Add click event listener to the polygon
       maps.event.addListener(neighborhood, 'click', () => {
-        // console.log('Polygon ' + chartId + ' clicked!')
         setChartId(chartId)
       })
 
@@ -65,7 +64,8 @@ const MapProvider = ({ children }) => {
       value={{
         handleApiLoaded,
         markers,
-        names
+        names,
+        chartId
       }}
     >
       {children}

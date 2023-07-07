@@ -2,7 +2,6 @@
 import Map from '@/components/Map'
 import Chart from '@/components/Chart'
 import styles from '@/styles/app.module.sass'
-import { ChartProvider } from '@/hooks/useChart'
 import { MapProvider } from '@/hooks/useMap'
 
 export default function Home() {
@@ -13,12 +12,10 @@ export default function Home() {
         neighborhoods population in Sao Jose dos Campos by clicking them on the
         map.
       </div>
-      <ChartProvider>
-        <MapProvider>
-          <Map />
-          <Chart />
-        </MapProvider>
-      </ChartProvider>
+      <MapProvider>
+        <Map />
+        <Chart />
+      </MapProvider>
     </main>
   )
 }

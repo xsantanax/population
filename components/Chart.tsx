@@ -2,13 +2,11 @@
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Label } from 'recharts'
 import populationData from '@/lib/populacao_bairros.json'
 import { getColor } from '@/lib/functions'
-import { useChart } from '@/hooks/useChart'
 import styles from '@/styles/chart.module.sass'
 import { useMap } from '@/hooks/useMap'
 
 function MyChart() {
-  const { chartId } = useChart()
-  const { names } = useMap()
+  const { names, chartId } = useMap()
   const regionData = populationData.filter(
     (item) => item.id_geometria == chartId
   )
@@ -17,7 +15,7 @@ function MyChart() {
     <>
       <div className={styles.regionName}>{names[chartId - 1]}</div>
       <div className={styles.container}>
-        {regionData.length > 0 && (
+        {regionData.length > 0 ? (
           <>
             <div className={styles.label}>Population</div>
             <LineChart width={380} height={320} data={regionData}>
@@ -25,6 +23,7 @@ function MyChart() {
                 type='monotone'
                 dataKey='populacao'
                 stroke={getColor(chartId)}
+                strokeWidth={2}
               />
               <CartesianGrid stroke='#ccc' />
               <XAxis dataKey='ano'>
@@ -33,6 +32,10 @@ function MyChart() {
               <YAxis domain={[5000, 25000]} />
             </LineChart>
           </>
+        ) : (
+          <div className={styles.noRegionAlert}>
+            Click a region to see its population growth.
+          </div>
         )}
       </div>
     </>
