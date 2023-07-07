@@ -15,7 +15,7 @@ const defaultProps = {
 }
 
 export default function Map() {
-  const { setChart } = useChart()
+  const { setChartId } = useChart()
   const [markers, setMarkers] = useState<number[][]>([])
 
   const handleApiLoaded = (map: any, maps: any) => {
@@ -43,19 +43,20 @@ export default function Map() {
 
     //create map objects (polygons)
     coordinatesObjects.map((coords, index) => {
+      const chartId = index + 1
       const neighborhood = new maps.Polygon({
         paths: coords,
-        strokeColor: getColor(index),
+        strokeColor: getColor(chartId),
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: getColor(index),
+        fillColor: getColor(chartId),
         fillOpacity: 0.35
       })
 
       // Add click event listener to the polygon
       maps.event.addListener(neighborhood, 'click', () => {
-        console.log('Polygon ' + (index + 1) + ' clicked!')
-        setChart(index + 1)
+        console.log('Polygon ' + chartId + ' clicked!')
+        setChartId(chartId)
       })
 
       //set polygon on the map
@@ -72,7 +73,7 @@ export default function Map() {
   console.log(markers)
 
   return (
-    <div style={{ height: '800px', width: '800px' }}>
+    <div style={{ height: '680px', width: '680px' }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.NEXT_PUBLIC_MAPS_API_KEY || '' }}
         defaultCenter={defaultProps.center}

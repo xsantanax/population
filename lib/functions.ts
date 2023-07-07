@@ -13,12 +13,12 @@ export function getCenterCoordinates(coordinates: any) {
   return [centerLng, centerLat]
 }
 
-export function getColor(index: number) {
-  return index == 0
+export function getColor(id: number) {
+  return id == 1
     ? '#FF0000'
-    : index == 1
+    : id == 2
     ? '#0000FF'
-    : index == 2
+    : id == 3
     ? '#22BBCC'
     : '#FF00FF'
 }

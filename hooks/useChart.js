@@ -4,13 +4,19 @@ import { useContext, createContext, useState } from 'react'
 const ChartContext = createContext()
 
 const ChartProvider = ({ children }) => {
-  const [chartId, setChart] = useState(null)
+  const [chartId, setChartId] = useState(null)
+  const [chartData, setChartData] = useState([])
+  const [name, setName] = useState(null)
 
   return (
     <ChartContext.Provider
       value={{
         chartId,
-        setChart
+        setChartId,
+        chartData,
+        setChartData,
+        name,
+        setName
       }}
     >
       {children}
