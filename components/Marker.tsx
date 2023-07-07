@@ -1,5 +1,5 @@
-import styles from '@/styles/marker.module.sass'
 import { LightBulbIcon } from '@heroicons/react/24/outline'
+import styles from '@/styles/marker.module.sass'
 
 function Marker({}: any) {
   return (

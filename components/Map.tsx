@@ -1,10 +1,10 @@
 'use client'
+import { useState } from 'react'
 import GoogleMapReact from 'google-map-react'
 import geometrias from '@/lib/geometrias_bairros.json'
-import { useState } from 'react'
 import { getCenterCoordinates, getColor } from '@/lib/functions'
-import Marker from './Marker'
 import { useChart } from '@/hooks/useChart'
+import Marker from '@/components/Marker'
 
 const defaultProps = {
   center: {

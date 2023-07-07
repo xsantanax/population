@@ -1,9 +1,9 @@
 'use client'
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Label } from 'recharts'
+import populationData from '@/lib/populacao_bairros.json'
+import { getColor } from '@/lib/functions'
 import { useChart } from '@/hooks/useChart'
 import styles from '@/styles/chart.module.sass'
-import populationData from '@/lib/populacao_bairros.json'
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Label } from 'recharts'
-import { getColor } from '@/lib/functions'
 
 function MyChart() {
   const { chartId } = useChart()
