@@ -3,6 +3,7 @@ import Map from '@/components/Map'
 import Chart from '@/components/Chart'
 import styles from '@/styles/app.module.sass'
 import { ChartProvider } from '@/hooks/useChart'
+import { MapProvider } from '@/hooks/useMap'
 
 export default function Home() {
   return (
@@ -13,8 +14,10 @@ export default function Home() {
         map.
       </div>
       <ChartProvider>
-        <Map />
-        <Chart />
+        <MapProvider>
+          <Map />
+          <Chart />
+        </MapProvider>
       </ChartProvider>
     </main>
   )
