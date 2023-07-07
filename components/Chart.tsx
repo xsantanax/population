@@ -12,7 +12,7 @@ function MyChart() {
   )
 
   return (
-    <>
+    <div data-testid='chart'>
       <div className={styles.regionName}>{names[chartId - 1]}</div>
       <div className={styles.container}>
         {regionData.length > 0 ? (
@@ -38,7 +38,7 @@ function MyChart() {
           </div>
         )}
       </div>
-    </>
+    </div>
   )
 }
 

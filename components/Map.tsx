@@ -15,7 +15,7 @@ export default function Map() {
   const { handleApiLoaded, markers } = useMap()
 
   return (
-    <div style={{ height: '680px', width: '680px' }}>
+    <div style={{ height: '680px', width: '680px' }} data-testid='map'>
       <GoogleMapReact
         bootstrapURLKeys={{ key: process.env.NEXT_PUBLIC_MAPS_API_KEY || '' }}
         defaultCenter={defaultProps.center}
@@ -28,7 +28,12 @@ export default function Map() {
         }}
       >
         {markers.map((item: any, index: number) => (
-          <Marker key={index} lat={item[1]} lng={item[0]} />
+          <Marker
+            key={index}
+            data-testid={index == 1 && 'marker'}
+            lat={item[1]}
+            lng={item[0]}
+          />
         ))}
       </GoogleMapReact>
     </div>
