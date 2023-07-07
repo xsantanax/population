@@ -1,6 +1,5 @@
 'use client'
 import { useContext, createContext, useState } from 'react'
-import { useChart } from '@/hooks/useChart'
 import geometrias from '@/lib/geometrias_bairros.json'
 import { getCenterCoordinates, getColor } from '@/lib/functions'
 
