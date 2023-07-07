@@ -1,12 +1,30 @@
 'use client'
 import GoogleMapReact from 'google-map-react'
 import geometrias from '@/geometrias_bairros.json'
+import { useState } from 'react'
+import styles from '@/styles/map.module.sass'
+import { LightBulbIcon } from '@heroicons/react/24/outline'
 
-// const AnyReactComponent = ({ text }: any) => (
-//   <div>
-//     <b>{text}</b>
-//   </div>
-// )
+const Marker = ({}: any) => (
+  <div className={styles.marker} onClick={() => console.log('clicked')}>
+    <LightBulbIcon className={styles.icon} fill='#f8f808' />
+  </div>
+)
+
+function getCenterCoordinates(coordinates: any) {
+  var totalLat = 0
+  var totalLng = 0
+
+  for (var i = 0; i < coordinates.length; i++) {
+    totalLat += coordinates[i][1]
+    totalLng += coordinates[i][0]
+  }
+
+  var centerLat = totalLat / coordinates.length
+  var centerLng = totalLng / coordinates.length
+
+  return [centerLng, centerLat]
+}
 
 function color(index: number) {
   return index == 0
@@ -19,6 +37,8 @@ function color(index: number) {
 }
 
 export default function Map() {
+  const [markers, setMarkers] = useState<number[][]>([])
+
   const defaultProps = {
     center: {
       lat: -23.218,
@@ -28,19 +48,29 @@ export default function Map() {
   }
 
   const handleApiLoaded = (map: any, maps: any) => {
-    const neighborhoods: number[][][] = []
+    const coordinatesArrays: number[][][] = []
+    const names: string[] = []
+    const centers: number[][] = []
+
+    //get coordinates, names and centers
     geometrias.features.map((item) => {
-      neighborhoods.push(item.geometry.coordinates[0][0])
+      coordinatesArrays.push(item.geometry.coordinates[0][0])
+      names.push(item.properties.name)
+      centers.push(getCenterCoordinates(item.geometry.coordinates[0][0]))
     })
 
-    neighborhoods.map((item, index) => {
+    //turn coordinates into objects
+    const coordinatesObjects = coordinatesArrays.map((item, index) => {
       const coords = item.map((subItem: any) => {
         const obj = { lat: null, lng: null }
         obj.lng = subItem[0]
         obj.lat = subItem[1]
         return obj
       })
+      return coords
+    })
 
+    coordinatesObjects.map((coords, index) => {
       const neighborhood = new maps.Polygon({
         paths: coords,
         strokeColor: color(index),
@@ -52,7 +82,15 @@ export default function Map() {
 
       neighborhood.setMap(map)
     })
+
+    console.log(coordinatesArrays)
+    console.log(names)
+    console.log(centers)
+
+    setMarkers([...centers])
   }
+
+  console.log(markers)
 
   return (
     <div style={{ height: '800px', width: '800px' }}>
@@ -63,7 +101,9 @@ export default function Map() {
         yesIWantToUseGoogleMapApiInternals
         onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
       >
-        {/* <AnyReactComponent lat={-23.2} lng={-45.9} text='Look at Me!!!' /> */}
+        {markers.map((item, index) => (
+          <Marker key={index} lat={item[1]} lng={item[0]} />
+        ))}
       </GoogleMapReact>
     </div>
   )
