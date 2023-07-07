@@ -1,34 +1,32 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a simple web interface designed to showcase frontend engineering experience.
 
-## Getting Started
+### Live Demo
 
-First, run the development server:
+You can check the app live demo at [https://population-xsantanax.vercel.app/](https://population-xsantanax.vercel.app/).
+
+You can also run it in your machine. First, run the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then, open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Stack Choices
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The following tools have been chosen due to their robustness, simplicity, and scalability.
 
-## Learn More
+- [ReactJS](https://react.dev/) was chosen as the base frontend framework.
 
-To learn more about Next.js, take a look at the following resources:
+- [NextJS](https://nextjs.org/docs) was chosen as the React framework since it is degined for serving web applications, which is this project case.
+  [`(See react recommended frameworks)`](https://react.dev/learn/start-a-new-react-project)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [TypeScript](https://www.typescriptlang.org/) was chosen for type safety.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [ContextAPI](https://react.dev/reference/react/createContext) was chosen for state management.
 
-## Deploy on Vercel
+- [SASS](https://sass-lang.com) was chosen for styling.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) were chosen for unit and integration testing.
