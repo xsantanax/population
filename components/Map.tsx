@@ -1,51 +1,20 @@
 'use client'
 import GoogleMapReact from 'google-map-react'
-import geometrias from '@/geometrias_bairros.json'
+import geometrias from '@/lib/geometrias_bairros.json'
 import { useState } from 'react'
-import styles from '@/styles/map.module.sass'
-import { LightBulbIcon } from '@heroicons/react/24/outline'
+import { getCenterCoordinates, getColor } from '@/lib/functions'
+import Marker from './Marker'
 
-const Marker = ({}: any) => (
-  <div className={styles.marker} onClick={() => console.log('clicked')}>
-    <LightBulbIcon className={styles.icon} fill='#f8f808' />
-  </div>
-)
-
-function getCenterCoordinates(coordinates: any) {
-  var totalLat = 0
-  var totalLng = 0
-
-  for (var i = 0; i < coordinates.length; i++) {
-    totalLat += coordinates[i][1]
-    totalLng += coordinates[i][0]
-  }
-
-  var centerLat = totalLat / coordinates.length
-  var centerLng = totalLng / coordinates.length
-
-  return [centerLng, centerLat]
-}
-
-function color(index: number) {
-  return index == 0
-    ? '#FF0000'
-    : index == 1
-    ? '#0000FF'
-    : index == 2
-    ? '#22BBCC'
-    : '#FF00FF'
+const defaultProps = {
+  center: {
+    lat: -23.218,
+    lng: -45.915
+  },
+  zoom: 14
 }
 
 export default function Map() {
   const [markers, setMarkers] = useState<number[][]>([])
-
-  const defaultProps = {
-    center: {
-      lat: -23.218,
-      lng: -45.915
-    },
-    zoom: 14
-  }
 
   const handleApiLoaded = (map: any, maps: any) => {
     const coordinatesArrays: number[][][] = []
@@ -70,16 +39,23 @@ export default function Map() {
       return coords
     })
 
+    //create map objects (polygons)
     coordinatesObjects.map((coords, index) => {
       const neighborhood = new maps.Polygon({
         paths: coords,
-        strokeColor: color(index),
+        strokeColor: getColor(index),
         strokeOpacity: 0.8,
         strokeWeight: 2,
-        fillColor: color(index),
+        fillColor: getColor(index),
         fillOpacity: 0.35
       })
 
+      // Add click event listener to the polygon
+      maps.event.addListener(neighborhood, 'click', () => {
+        console.log('Polygon ' + (index + 1) + ' clicked!')
+      })
+
+      //set polygon on the map
       neighborhood.setMap(map)
     })
 
@@ -100,6 +76,10 @@ export default function Map() {
         defaultZoom={defaultProps.zoom}
         yesIWantToUseGoogleMapApiInternals
         onGoogleApiLoaded={({ map, maps }) => handleApiLoaded(map, maps)}
+        options={{
+          clickableIcons: true,
+          disableDoubleClickZoom: true
+        }}
       >
         {markers.map((item, index) => (
           <Marker key={index} lat={item[1]} lng={item[0]} />
