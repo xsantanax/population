@@ -29,4 +29,4 @@ The following tools have been chosen due to their robustness, simplicity, and sc
 
 - [SASS](https://sass-lang.com) was chosen for styling.
 
-- [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) were chosen for unit and integration testing.
+- [Jest](https://jestjs.io/) and [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) were chosen for testing.
