@@ -1,0 +1,18 @@
+@mixin col()
+  display: flex
+  flex-direction: column
+
+.container
+  @include col 
+  background-color: white
+  min-height: 100vh
+  align-items: center
+  gap: 10px
+  padding: 20px
+  font-size: 15px
+
+.intro
+  margin: 22px
+  margin-top: 26px
+  max-width: 580px
+  text-align: center
