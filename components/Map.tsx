@@ -4,6 +4,7 @@ import geometrias from '@/lib/geometrias_bairros.json'
 import { useState } from 'react'
 import { getCenterCoordinates, getColor } from '@/lib/functions'
 import Marker from './Marker'
+import { useChart } from '@/hooks/useChart'
 
 const defaultProps = {
   center: {
@@ -14,6 +15,7 @@ const defaultProps = {
 }
 
 export default function Map() {
+  const { setChart } = useChart()
   const [markers, setMarkers] = useState<number[][]>([])
 
   const handleApiLoaded = (map: any, maps: any) => {
@@ -53,6 +55,7 @@ export default function Map() {
       // Add click event listener to the polygon
       maps.event.addListener(neighborhood, 'click', () => {
         console.log('Polygon ' + (index + 1) + ' clicked!')
+        setChart(index + 1)
       })
 
       //set polygon on the map

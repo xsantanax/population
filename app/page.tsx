@@ -1,5 +1,8 @@
+'use client'
 import Map from '@/components/Map'
+import Chart from '@/components/Chart'
 import styles from '@/styles/app.module.sass'
+import { ChartProvider } from '@/hooks/useChart'
 
 export default function Home() {
   return (
@@ -9,7 +12,10 @@ export default function Home() {
         neighborhoods population in Sao Jose dos Campos by clicking them on the
         map.
       </div>
-      <Map />
+      <ChartProvider>
+        <Map />
+        <Chart />
+      </ChartProvider>
     </main>
   )
 }
